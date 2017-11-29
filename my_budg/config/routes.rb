@@ -19,6 +19,4 @@ resources :expenses
 
 resources :bills
 
-resources :months
-
 end
