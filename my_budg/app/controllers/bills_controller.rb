@@ -8,11 +8,6 @@ class BillsController < ApplicationController
      end
    end
 
-   def index
-     @bills = Bill.all.select(user_id: (current_user.id))
-     render 
-
-   end
 
    def new
      @bill = Bill.new

@@ -55,6 +55,8 @@
 
     </style>
     <meta charset="utf-6">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
     <title></title>
   </head>
   <body>
@@ -76,9 +78,42 @@
           </section>
         </aside>
       </div>
-            <div class="footer">
-            <h3><%= link_to "add expenses", new_expense_path(current_user) %> |
-            <%= link_to "add bills", new_bill_path(current_user) %></h3>
-      </div>
+        <div class="expenses">
+          <h1>my expenses</h1><br>
+          <% @expenses = Expense.all.select { |e| e.user_id == current_user.id } %>
+          <% @expenses.each do |e| %>
+          <h4>name: <%= e.name %> | type: <%= e.expense_type %> | cost: $<%= e.cost %></h4><br>
+          <% end %>
+          <% $expenses = @expenses.map! { |b| b.cost.to_i } %>
+          <h4>total: $<%= $expenses.reduce(:+) %></h4>
+        </div>
+        <div class="bills">
+          <h1>my bills</h1><br>
+          <% @bills = Bill.all.select { |e| e.user_id == current_user.id } %>
+          <% @bills.each do |e| %>
+          <h4>name: <%= e.company %> | type: <%= e.bill_type %> | cost: $<%= e.cost %></h4><br>
+          <% end %>
+          <% $bills = @bills.map! { |b| b.cost.to_i } %>
+          <h4>total: $<%= $bills.reduce(:+) %></h4>
+        </div>
+          <div class="footer">
+          <h3><%= link_to "add expenses", new_expense_path(current_user) %> |
+          <%= link_to "add bills", new_bill_path(current_user) %></h3>
+        </div>
+        <script type="text/javascript">
+      $(document).ready(function() {
+        var expenses = $.get('/expenses.json');
+        var bills = $.get('/bills.json');
+
+        console.log(expenses.to_a);
+        //
+        // $(function() {
+        //
+        // })
+
+
+
+      });
+      </script>
   </body>
 </html>

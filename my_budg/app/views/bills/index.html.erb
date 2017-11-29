@@ -46,14 +46,6 @@
     <title>my bills</title>
   </head>
   <body>
-    <div class="bills">
-      <h1>my bills</h1><br>
-      <% @bills = Bill.all.select { |e| e.user_id == current_user.id } %>
-      <% @bills.each do |e| %>
-      <h4>name: <%= e.company %> | type: <%= e.bill_type %> | cost: $<%= e.cost %></h4><br>
-      <% end %>
-      <% $bills = @bills.map! { |b| b.cost.to_i } %>
-      <h4>total: $<%= $bills.reduce(:+) %></h4>
-    </div>
+
   </body>
 </html>
