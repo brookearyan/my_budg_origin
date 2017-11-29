@@ -1,6 +1,8 @@
 
 class User {
 
+  User.all = [];
+
   constructor(data) {
     this.id = data.id;
     this.name = data.name;
@@ -11,5 +13,18 @@ class User {
 
     User.all.push(this);
   }
+
+  expenses() {
+    return Expenses.all.filter(expense => {
+      return expense.user_id === this.id
+    })
+  };
+
+  bills() {
+    return Bill.all.filter(bill => {
+      return bill.user_id === this.id
+    })
+  };
+
 
 }

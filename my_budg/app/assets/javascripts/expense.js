@@ -1,4 +1,7 @@
 class Expense {
+
+  Expense.all = [];
+
   constructor(data) {
     this.id = data.id;
     this.name = data.name;
@@ -6,7 +9,11 @@ class Expense {
     this.cost = data.cost;
     this.start_time = data.start_time;
     this.user_id = data.user_id;
-    
+
     Expense.all.push(this);
   }
+
+  
+
+
 }

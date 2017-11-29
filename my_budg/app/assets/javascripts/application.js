@@ -1,6 +1,6 @@
-class App {
-  // constructor() {
-  //   this.adapter = new Adapter();
-  //
-  // }
-}
+// class App {
+//   constructor() {
+//     this.adapter = new Adapter();
+//
+//   }
+// }

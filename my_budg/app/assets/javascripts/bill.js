@@ -1,4 +1,7 @@
 class Bill {
+
+  Bill.all = [];
+
   constructor(data) {
     this.id = data.id;
     this.name = data.company;
@@ -9,11 +12,5 @@ class Bill {
     Bill.all.push(this);
   }
 
-  userBills () {
-    if (this.user_id === current_user.id) {
-      listBills.push(this);
-    }
-  }
-  listBills = [];
 
 }
