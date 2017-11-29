@@ -85,16 +85,13 @@
           <% end %>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <div id="user-result">
-          </div>
-        </div>
+      <div class="col-sp-6">
+        <table id="user-result"></table>
       </div>
       <script type="text/javascript" charset="utf-8">
-
         $(function () {
           $('form').submit(function(e) {
+
             e.preventDefault();
 
             var values = $(this).serialize();
@@ -103,19 +100,25 @@
 
             posting.done(posting => {
               const markup =
-              `<li>
-                <h2> ${posting.name} </h2>
-                <p> email: ${posting.email} </p>
-                <p> password: ********** </p>
-                <p> zipcode: ${posting.zipcode} </p>
-                <p> annual income: ${posting.income} </p>
-              </li>`;
+              `<tr>
+                <th colspan="2">${posting.name}</th>
+              </tr>
+              <tr>
+                <td> email: </td><td>${posting.email}</td>
+              </tr>
+              <tr>
+                <td> password: </td><td> ********* </td>
+              </tr>
+              <tr>
+                <td> zipcode: </td><td>${posting.zipcode}</td>
+              </tr>
+              <tr>
+                <td> annual income: </td><td>${posting.income}</td>
+              </tr>`;
               $('#user-result').append(markup);
-
             });
             $('form').hide();
           });
-
         });
 
       </script>

@@ -9,11 +9,11 @@ class Bill {
     Bill.all.push(this);
   }
 
-  // userBills () {
-  //   if (this.user_id === current_user.id) {
-  //     listBills.push(this);
-  //   }
-  // }
-  // listBills = [];
+  userBills () {
+    if (this.user_id === current_user.id) {
+      listBills.push(this);
+    }
+  }
+  listBills = [];
 
 }

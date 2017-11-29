@@ -71,11 +71,8 @@
             <% end %>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3">
-            <div id="expense-result">
-            </div>
-          </div>
+        <div class="col-sp-6">
+          <table id="expense-result"></table>
         </div>
         <script type="text/javascript" charset="utf-8">
           $(function () {
@@ -89,13 +86,21 @@
 
               posting.done(posting => {
                 let markup =
-                `<li>
-                  <h2> ${posting.name} </h2>
-                  <p> cost: ${posting.cost} </p>
-                  <p> type: ${posting.expense_type} </p>
-                  <p> payment date: ${posting.start_time} </p>
-                </li>`;
-                $('#expense-result').append(markup);              });
+                `<tr>
+                  <td colspan="2">${posting.name}</td>
+                </tr>
+                <tr>
+                  <td> expense_type: </td><td>${posting.expense_type}</td>
+                </tr>
+                <tr>
+                  <td> cost: </td><td>${posting.cost}</td>
+                </tr>
+                <tr>
+                  <td> payment date: </td><td>${posting.start_time}</td>
+                </tr>`;
+                $('#expense-result').append(markup);
+              });
+              $('.form-control').val('');
             });
           });
         </script>

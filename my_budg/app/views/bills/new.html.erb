@@ -103,15 +103,21 @@
 
               posting.done(posting => {
                 let markup =
-
-                `<li>
-                  <h2> ${posting.company} </h2>
-                  <p> cost: ${posting.cost} </p>
-                  <p> type: ${posting.bill_type} </p>
-                  <p> payment date: ${posting.start_time} </p>
-                </li>`;
+                `<tr>
+                  <td colspan="2">${posting.company}</td>
+                </tr>
+                <tr>
+                  <td> bill_type: </td><td>${posting.bill_type}</td>
+                </tr>
+                <tr>
+                  <td> cost: </td><td>${posting.cost}</td>
+                </tr>
+                <tr>
+                  <td> payment due: </td><td>${posting.start_time}</td>
+                </tr>`;
                 $('#bill-result').append(markup);
               });
+              $('.form-control').val('');
             });
           });
       </script>
