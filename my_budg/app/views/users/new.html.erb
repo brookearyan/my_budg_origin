@@ -59,7 +59,7 @@
   <body>
     <br><h1>sign up</h1><br><br>
       <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6">
           <%= form_for(@user) do |f| %>
             <%= render 'shared/error_messages' %>
 
@@ -111,8 +111,11 @@
                 <p> annual income: ${posting.income} </p>
               </li>`;
               $('#user-result').append(markup);
+
             });
+            $('form').hide();
           });
+
         });
 
       </script>

@@ -8,4 +8,12 @@ class Bill {
     this.user_id = data.user_id;
     Bill.all.push(this);
   }
+
+  // userBills () {
+  //   if (this.user_id === current_user.id) {
+  //     listBills.push(this);
+  //   }
+  // }
+  // listBills = [];
+
 }
