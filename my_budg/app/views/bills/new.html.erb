@@ -27,6 +27,19 @@
 
       }
 
+      table {
+        font-family: 'Open Sans', sans-serif;
+        width: 960px;
+        font-size: 20px;
+        line-height: 2;
+        margin-top: 20px;
+      }
+
+      td {
+        width: 50%;
+      }
+
+
       h1, h2, h4, h5 {
         font-family: 'Lora', serif;
         color: #808080;
@@ -64,7 +77,6 @@
   </head>
   <body>
     <div class="row">
-      <div class="col-md-6 col-md-offset-3">
         <br><h1>add new bill</h1><br>
         <%= form_for(@bill) do |f| %>
 
@@ -84,13 +96,10 @@
 
         <%= f.submit "add bill", class: 'btn btn-primary'  %><br>
         <% end %>
-        </div>
       </div>
       <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <div id="bill-result">
-          </div>
-        </div>
+          <table colspan="2" id="bill-result">
+        </table colspan=>
       </div>
         <script type="text/javascript" charset="utf-8">
           $(function () {
@@ -104,17 +113,11 @@
               posting.done(posting => {
                 let markup =
                 `<tr>
-                  <td colspan="2">${posting.company}</td>
+                  <td>${posting.company}</td>
                 </tr>
                 <tr>
-                  <td> bill_type: </td><td>${posting.bill_type}</td>
-                </tr>
-                <tr>
-                  <td> cost: </td><td>${posting.cost}</td>
-                </tr>
-                <tr>
-                  <td> payment due: </td><td>${posting.start_time}</td>
-                </tr>`;
+                  <td> type: </td><td>${posting.bill_type}</td>
+                  <td> cost: </td><td>${posting.cost}</td></tr>`;
                 $('#bill-result').append(markup);
               });
               $('form')[0].reset();

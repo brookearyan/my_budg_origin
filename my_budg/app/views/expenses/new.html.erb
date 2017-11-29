@@ -30,6 +30,18 @@
         color: black;
       }
 
+      table {
+        font-family: 'Open Sans', sans-serif;
+        width: 960px;
+        font-size: 20px;
+        line-height: 2;
+        margin-top: 20px;
+      }
+
+      td {
+        width: 50%;
+      }
+
       h1 {
         margin-top: 24px;
         font-size: 30px;
@@ -56,7 +68,6 @@
   </head>
       <body>
         <div class="row">
-          <div class="col-md-6 col-md-offset-3">
           <br><h1>add new expense</h1><br>
             <%= form_for(@expense) do |f| %>
             <%= f.label :name, "name" %>
@@ -69,10 +80,8 @@
             <%= f.hidden_field :user_id, :value => current_user.id %>
             <%= f.submit "add expense" , class: 'btn btn-primary' %><br>
             <% end %>
-          </div>
         </div>
-        <div class="col-sp-6">
-          <table id="expense-result"></table>
+          <table colspan="2" id="expense-result"></table>
         </div>
         <script type="text/javascript" charset="utf-8">
           $(function () {
@@ -90,14 +99,9 @@
                   <td colspan="2">${posting.name}</td>
                 </tr>
                 <tr>
-                  <td> expense_type: </td><td>${posting.expense_type}</td>
-                </tr>
-                <tr>
+                  <td> type: </td><td>${posting.expense_type}</td>
                   <td> cost: </td><td>${posting.cost}</td>
-                </tr>
-                <tr>
-                  <td> payment date: </td><td>${posting.start_time}</td>
-                </tr>`;
+               </tr>`;
                 $('#expense-result').append(markup);
               });
               $('form')[0].reset();

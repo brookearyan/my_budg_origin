@@ -11,34 +11,65 @@
       body {
         background-color: #FAFBFC;
         font-family: 'Open Sans', sans-serif;
+      }
 
+      th, h1, h2, h3{
+        font-family: 'Abril Fatface', cursive;
+        letter-spacing: 1.5px;
+      }
+
+      td {
+      width: 25%;
+      text-align: left;
       }
 
       h1 {
-        font-family: 'Open Sans', sans-serif;
         text-align: center;
-
+        margin-top: 35px;
       }
 
-      .section {
+      h3 {
+        font-size: 30px;
+      }
+
+      section {
         width: 1000px;
         margin: 0 auto;
+        float: left;
+        display: inline-block;
       }
 
-      .article {
-        width: 450px;
+      article {
+        margin: 10px;
+        float: left;
+        display: inline-block;
+        line-height: 1.5;
+        letter-spacing: 1px;
+      }
+
+      .info {
+        font-size: 18px;
+      }
+
+      #expenses, #bills {
+        width: 1000px;
+      }
+
+      #title {
+        height: 30px;
         margin: 10px;
       }
 
       .footer{
         font-family: 'Open Sans', sans-serif;
-        text-align: right;
+        clear: both;
+        text-align: center;
       }
 
 
 
     </style>
-    <meta charset="utf-6">
+    <!-- <meta charset="utf-6"> -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="/user.js" type="text/javascript">
 
@@ -49,25 +80,43 @@
     <% provide(:title, @user.name) %>
     <div class="user-profile">
       <section class="user-info">
-        <h1>mybudg profile</h1><br>
-
-        <article class="info">
+        <h1>your profile</h1><br>
           <table id="user"></table>
-        </article>
+        </section><br><br>
 
-        <article class="exp-info">
-          <table id="expenses"></table>
-        </article>
+      <section>
+          <article class="exp-info">
+            <h3 id='title'>expenses</h3>
+
+          <table colspan="4" id="expenses">
+              <row>
+                <th>name</th>
+                <th>type</th>
+                <th>cost</th>
+                <th>current total</th>
+              </row>
+          </table>
+        </article><br><br>
 
         <article class="bill-info">
-          <table id="bills"></table>
+          <h3 id='title'>bills</h3>
+
+          <table colspan="4" id="bills">
+              <row>
+                <th>company</th>
+                <th>type</th>
+                <th>cost</th>
+                <th>current total</th>
+              </row>
+          </table>
         </article>
+      </section>
+
 
         <div class="footer">
           <h3><%= link_to "add expenses", new_expense_path(current_user) %> |
           <%= link_to "add bills", new_bill_path(current_user) %></h3>
         </div>
-      </section>
     </div>
         <script>
           $(document).ready(function(){
@@ -85,6 +134,8 @@
                   currency: 'USD',
                   minimumFractionDigits: 2,
                 });
+
+
                 let income = formatter.format(json.income);
                 let afterTax = Math.floor(json['income']*=.65);
                 let monthly = Math.floor(afterTax/12);
@@ -96,7 +147,7 @@
                 const userInfo =
                 `<tr>
                   <th colspan="6">${json.name}</th>
-                </tr>
+                </tr><br>
                 <tr>
                 <td> email: </td><td>${json.email}</td>
                 </tr>
@@ -113,7 +164,7 @@
                 <td> after-tax income: </td><td>${afterTaxF}</td>
                 <tr>
                 </tr>
-                <td> monthly gross income: </td><td>${monthlyF}</td>
+                <td> gross income: </td><td>${monthlyF}</td>
                 <tr>`;
                 $('#user').append(userInfo);
 
@@ -124,27 +175,30 @@
                 let eTotal = 0;
 
                 list.forEach(e => {
-                  let exp =
-                  `<tr><th>${e.name}</th></tr>
-                  <tr><td> type: </td><td>${e.expense_type}</td></tr>
-                  <tr><td> cost: </td><td>${e.cost}</td></tr>`;
-                  $('#expenses').append(exp);
                   eTotal+=(parseInt(e['cost']));
                   let esum = formatter.format(eTotal);
-                  $('#expenses').append`<tf id="exp-tf"> total expenses: ${esum} </tf>`;
+
+                  let exp =
+                  `<tr><td>${e.name}</td>
+                  <td>${e.expense_type}</td>
+                  <td>${e.cost}</td>
+                  <td>${esum}</td></tr>`;
+                  $('#expenses').append(exp);
+
                 })
 
                 let bTotal = 0;
 
                 listB.forEach(b => {
-                  let bills =
-                  `<tr><th>${b.company}</th></tr>
-                  <tr><td> type: </td><td>${b.bill_type}</td></tr>
-                  <tr><td> cost: </td><td>${b.cost}</td></tr>`;
-                  $('#bills').append(bills);
                   bTotal+=(parseInt(b['cost']));
                   let sum = formatter.format(bTotal);
-                  $('#bills').append`<tf id="bill-tf"> total bills: ${sum} </tf>`;
+
+                  let bills =
+                  `<tr><td>${b.company}</td>
+                  <td>${b.bill_type}</td>
+                  <td>${b.cost}</td>
+                  <td>${sum}</td></tr>`;
+                  $('#bills').append(bills);
                 })
               }
             })
