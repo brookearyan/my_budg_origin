@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -56,64 +55,107 @@
     </style>
     <meta charset="utf-6">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="/user.js" type="text/javascript">
 
+    </script>
     <title></title>
   </head>
   <body>
     <% provide(:title, @user.name) %>
-    <div class="profile">
-      <aside class="col-md-6">
-        <section class="user_info">
+    <div class="user-profile">
+        <section class="user-info">
           <h1>mybudg profile</h1><br>
-          <div class="user">
-            <strong><h4><%= @user.name %></h4></strong>
-            <br><p>email: <%= @user.email %></p><br>
-            <p>password: **********</p><br>
-            <p>annual income: <%= @user.income %></p><br>
-            <p>zipcode: <%= @user.zipcode %></p><br>
-            <% @income = @user.income.to_f %>
-            <% @after_taxes = @income*= 0.65 %>
-            <p>after taxes: $<%= @after_taxes.to_i %></p><br>
-            <p>income per month: $<%= @after_taxes.to_i/12 %></p><br>
-          </section>
-        </aside>
+          <table id="user">
+            </table>
       </div>
         <div class="expenses">
           <h1>my expenses</h1><br>
-          <% @expenses = Expense.all.select { |e| e.user_id == current_user.id } %>
+          <!-- <% @expenses = Expense.all.select { |e| e.user_id == current_user.id } %>
           <% @expenses.each do |e| %>
           <h4>name: <%= e.name %> | type: <%= e.expense_type %> | cost: $<%= e.cost %></h4><br>
           <% end %>
           <% $expenses = @expenses.map! { |b| b.cost.to_i } %>
-          <h4>total: $<%= $expenses.reduce(:+) %></h4>
+          <h4>total: $<%= $expenses.reduce(:+) %></h4> -->
         </div>
         <div class="bills">
           <h1>my bills</h1><br>
-          <% @bills = Bill.all.select { |e| e.user_id == current_user.id } %>
+          <!-- <% @bills = Bill.all.select { |e| e.user_id == current_user.id } %>
           <% @bills.each do |e| %>
           <h4>name: <%= e.company %> | type: <%= e.bill_type %> | cost: $<%= e.cost %></h4><br>
           <% end %>
           <% $bills = @bills.map! { |b| b.cost.to_i } %>
-          <h4>total: $<%= $bills.reduce(:+) %></h4>
+          <h4>total: $<%= $bills.reduce(:+) %></h4> -->
         </div>
           <div class="footer">
           <h3><%= link_to "add expenses", new_expense_path(current_user) %> |
           <%= link_to "add bills", new_bill_path(current_user) %></h3>
         </div>
-        <script type="text/javascript">
-      $(document).ready(function() {
-        var expenses = $.get('/expenses.json');
-        var bills = $.get('/bills.json');
+<tr>
+  <td></td><td></td>
+</tr>
+        <script>
+          $(document).ready(function(){
+            const url = window.location.href;
+            fetch(url, {
+                headers :
+                { 'Content-Type': 'application/json',
+                'Accept': 'application/json' }
+                })
+                .then(res => res.json())
+                .then(json => userCont(json));
 
-        console.log(expenses.to_a);
-        //
-        // $(function() {
-        //
-        // })
+              function userCont(json) {
+                var formatter = new Intl.NumberFormat('en-US', {
+                  style: 'currency',
+                  currency: 'USD',
+                  minimumFractionDigits: 2,
+                });
+                let income = formatter.format(json.income);
+                let afterTax = Math.floor(json['income']*=.65);
+                let monthly = Math.floor(afterTax/=12);
+                let expList = json['expenses']
+
+                let afterTaxF = formatter.format(afterTax);
+                let monthlyF = formatter.format(monthly);
 
 
+                const userInfo =
+                `<tr>
+                  <th colspan="6">${json.name}</th>
+                </tr>
+                <tr>
+                <td> email: </td><td>${json.email}</td>
+                </tr>
+                <tr>
+                <td> password: </td><td> *********** </td>
+                </tr>
+                </tr>
+                <td> zipcode: </td><td>${json.zipcode}</td>
+                <tr>
+                </tr>
+                <td> annual income: </td><td>${income}</td>
+                <tr>
+                </tr>
+                <td> after-tax income: </td><td>${afterTaxF}</td>
+                <tr>
+                </tr>
+                <td> monthly gross income: </td><td>${monthlyF}</td>
+                <tr>`;
+                $('#user').append(userInfo);
 
-      });
-      </script>
+                const expInfo =
+
+                expList.forEach 
+
+console.log(userExp.forEach);
+
+              }
+            })
+
+
+        </script>
+        <!-- // let id = window.location.href
+
+
   </body>
 </html>

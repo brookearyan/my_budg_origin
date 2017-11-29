@@ -12,7 +12,7 @@ e1 = Expense.create({name: "gas", cost: 50, expense_type: "transportation", star
 
 b1 = Bill.create({company: "Comcast", cost: 125, bill_type: "utilities", start_time: "1/1/18", user_id: 1})
 
-m1 = Month.create({name: "January", user_id: 1})
+
 
 e0 = Expense.create({name: "dinner", cost: 100, expense_type: "restaurants/takeout", start_time: "1/1/18", user_id: 1})
 e2 = Expense.delete({name: "work lunch", cost: 50, expense_type: "restaurants/takeout", start_time: "1/1/18", user_id: 1})
