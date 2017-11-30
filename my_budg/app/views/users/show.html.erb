@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Alegreya+Sans|Amaranth|Amiri|Arima+Madurai|Arizonia|Arvo|Assistant|Averia+Serif+Libre|Baloo+Da|Baloo+Tammudu|Baloo+Thambi|Berkshire+Swash|Bree+Serif|Buda:300|Cabin+Sketch|Carrois+Gothic+SC|Caveat+Brush|Cherry+Swash|Cinzel+Decorative|Clicker+Script|Convergence|Corben|Cormorant+Garamond|Crimson+Text|Croissant+One|Elsie|Euphoria+Script|Forum|Hammersmith+One|Handlee|Jacques+Francois+Shadow|Katibeh|Lato|League+Script|Libre+Baskerville|Lily+Script+One|Lobster|Mada|Merriweather|Miltonian|Miniver|Molengo|Molle:400i|Monoton|Montserrat+Subrayada|Oleo+Script|Overlock+SC|Pacifico|Patua+One|Playfair+Display|Pontano+Sans|Raleway|Rochester|Rock+Salt|Ruluko|Sail|Salsa|Sirin+Stencil|Sree+Krushnadevaraya|Stardos+Stencil|Suez+One|Tinos|Vibur|Vollkorn|Yatra+One|Yeseva+One" rel="stylesheet">
     <style media="screen">
 
       * {
@@ -9,26 +9,40 @@
       }
 
       body {
-        background-color: #FAFBFC;
-        font-family: 'Open Sans', sans-serif;
+        background-color: #ECBCBC;
+        font-family: 'Assistant', sans-serif;
         margin: 0 auto;
         color: #263675;
+
       }
 
-      th, h1, h2, h3{
-        font-family: 'Abril Fatface', cursive;
+      h1, h2, h3{
+        font-family: 'Stardos Stencil', cursive;
         letter-spacing: 1.5px;
+        font-weight: lighter;
+        text-shadow: 2px 2px lightgrey;
+      }
+
+      th {
+        font-size: 22px;
+        font-weight: bold;
       }
 
       td {
       width: 250px;
       text-align: left;
+      line-height: 2;
+      color: #263675;
+
+
       }
 
       tr {
         border-bottom: solid;
-        border-bottom-color: lightgrey;
+        border-bottom-color: grey;
         border-width: thin;
+        color: #84878A;
+
 
       }
 
@@ -48,11 +62,13 @@
       h1 {
         text-align: center;
         margin-top: 35px;
+        font-size: 44px;
+        color: #263675;
       }
 
       h3 {
-        font-size: 30px;
-        margin: 10px;
+        font-size: 44px;
+        margin-top: 35px;
       }
 
       section {
@@ -64,11 +80,13 @@
       }
 
       article {
-        margin: 25px;
-        float: left;
+        padding: 60px;
         display: inline-block;
-        line-height: 2;
         letter-spacing: 1px;
+      }
+
+      .logo {
+        color: #263675;
       }
 
       .info {
@@ -87,13 +105,20 @@
         border-width: medium;
       }
 
+      #user-info {
+        background-color: #F2CBCB;
+        padding: 20px;
+        margin: 20px;
+      }
+
       #expenses, #bills {
         width: 1000px;
       }
 
       #title {
         height: 30px;
-        margin: 10px;
+        line-height: .5;
+        color: #263675;
       }
 
       #r {
@@ -121,7 +146,7 @@
     <div class="user-profile">
       <section class="topper">
         <article id="user-info">
-          <h1>your profile</h1><br>
+          <h1 id="title">your profile</h1><br>
           <table colspan="4" id="user"></table>
         </article>
         <canvas id="myChart"></canvas>

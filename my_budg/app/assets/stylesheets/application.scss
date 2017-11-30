@@ -1,5 +1,5 @@
  html {
-   background-color: #FAFBFC;
+   background-color: #ECBCBC;
  }
 
   div {
@@ -7,27 +7,38 @@
    padding: 0;
  }
 
- .nav {
 
- .logo {
+.logo {
   text-align: left;
-  font-family: 'Abril Fatface', cursive;
-  font-size: 70px;
+  font-family: 'Montserrat Subrayada', sans-serif;
+  font-size: 75px;
   color: #263675;
   margin-bottom: 15px;
-  margin-left: 20px;
-  text-shadow: 3px 3px #white;
+  margin-left: 30px;
+  text-shadow: 3px 3px white;
 
 
 }
 
+.nav {
+}
+
+header {
+  background-image: url("IMG_5021.jpg");
+  background-repeat: no-repeat;
+
+}
 
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #DE9EA0;
+    // background-image: url("IMG_5021.jpg");
+    min-height: 100px;
+
+
+    // background-color: #DE9EA0;
 }
 
 li {
@@ -41,27 +52,27 @@ li a {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 18px;
-    font-family: 'Open Sans', sans-serif;
+    font-size: 22px;
+    font-family: 'Stardos Stencil', cursive;
     font-weight: 100;
     letter-spacing: 1px;
-
-
+    border-bottom: solid;
+    border-bottom-width: thin;
+    border-color: #263675;
 
 }
 
 li a:hover {
-  background-color: #ECAEB0;
+  text-decoration: none;
+
 }
+
 
 h1 a:hover {
   text-decoration: none;
-  color: #black;
+  color: black;
 }
 
 h1 a:visited {
-  color: #003366;
-}
-
-
+  color: #263675;
 }
