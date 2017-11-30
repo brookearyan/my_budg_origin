@@ -11,6 +11,8 @@
       body {
         background-color: #FAFBFC;
         font-family: 'Open Sans', sans-serif;
+        margin: 0 auto;
+        color: #263675;
       }
 
       th, h1, h2, h3{
@@ -19,8 +21,28 @@
       }
 
       td {
-      width: 25%;
+      width: 250px;
       text-align: left;
+      }
+
+      tr {
+        border-bottom: solid;
+        border-bottom-color: lightgrey;
+        border-width: thin;
+
+      }
+
+      h2 a {
+        text-decoration: none;
+      }
+
+      h2 a:hover {
+        text-decoration: none;
+        color: #black;
+      }
+
+      h2 a:visited {
+        color: #003366;
       }
 
       h1 {
@@ -30,25 +52,39 @@
 
       h3 {
         font-size: 30px;
+        margin: 10px;
       }
 
       section {
         width: 1000px;
-        margin: 0 auto;
+        line-height: 2;
+        font-size: 20px;
         float: left;
         display: inline-block;
       }
 
       article {
-        margin: 10px;
+        margin: 25px;
         float: left;
         display: inline-block;
-        line-height: 1.5;
+        line-height: 2;
         letter-spacing: 1px;
       }
 
       .info {
         font-size: 18px;
+      }
+
+      .footer {
+        text-align: center;
+        clear: both;
+      }
+
+      .user-profile {
+        border-left-style: solid;
+        border-right-style: solid;
+        border-color: white;
+        border-width: medium;
       }
 
       #expenses, #bills {
@@ -60,16 +96,20 @@
         margin: 10px;
       }
 
-      .footer{
-        font-family: 'Open Sans', sans-serif;
-        clear: both;
-        text-align: center;
+      #r {
+        text-align: right;
+      }
+
+      #userName {
+        font-size: 30px;
+        border-bottom-style: : none;
       }
 
 
 
     </style>
     <!-- <meta charset="utf-6"> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="/user.js" type="text/javascript">
 
@@ -79,11 +119,13 @@
   <body>
     <% provide(:title, @user.name) %>
     <div class="user-profile">
-      <section class="user-info">
-        <h1>your profile</h1><br>
-          <table id="user"></table>
-        </section><br><br>
-
+      <section class="topper">
+        <article id="user-info">
+          <h1>your profile</h1><br>
+          <table colspan="4" id="user"></table>
+        </article>
+        <canvas id="myChart"></canvas>
+      </section><br><br>
       <section>
           <article class="exp-info">
             <h3 id='title'>expenses</h3>
@@ -92,12 +134,14 @@
               <row>
                 <th>name</th>
                 <th>type</th>
-                <th>cost</th>
-                <th>current total</th>
+                <th id="r">cost</th>
+                <th id="r">current total</th>
               </row>
           </table>
-        </article><br><br>
+        </article>
+      </section>
 
+      <section>
         <article class="bill-info">
           <h3 id='title'>bills</h3>
 
@@ -105,8 +149,8 @@
               <row>
                 <th>company</th>
                 <th>type</th>
-                <th>cost</th>
-                <th>current total</th>
+                <th id="r">cost</th>
+                <th id="r">current total</th>
               </row>
           </table>
         </article>
@@ -114,8 +158,8 @@
 
 
         <div class="footer">
-          <h3><%= link_to "add expenses", new_expense_path(current_user) %> |
-          <%= link_to "add bills", new_bill_path(current_user) %></h3>
+          <h2><%= link_to "add expenses", new_expense_path(current_user) %> |
+          <%= link_to "add bills", new_bill_path(current_user) %></h2>
         </div>
     </div>
         <script>
@@ -146,9 +190,6 @@
 
                 const userInfo =
                 `<tr>
-                  <th colspan="6">${json.name}</th>
-                </tr><br>
-                <tr>
                 <td> email: </td><td>${json.email}</td>
                 </tr>
                 <tr>
@@ -170,21 +211,41 @@
 
                 let list = json['expenses'];
 
+                const expTypes = ['entertainment', 'restaurants/takeout', 'clothing/cosmetics', 'transportation', 'groceries'];
+
                 let listB = json['bills'];
 
-                let eTotal = 0;
+                let debits = list.concat(listB);
+
+                let dTotal = 0;
+
+                debits.forEach(d => {
+                  dTotal+=(parseInt(d['cost']));
+                })
+                let disposible = monthly - dTotal;
+                let disposibleF = formatter.format(disposible);
+                let disWeekly = formatter.format(disposible/4);
+
+                let debitTotal = `<tr>
+                <td> disposible income: </td><td>${disposibleF}</td>
+                </tr><tr>
+                <td> weekly disposible: </td><td>${disWeekly}</td>
+                </tr>`;
+                $('#user').append(debitTotal);
+
+                  let eTotal = 0;
 
                 list.forEach(e => {
                   eTotal+=(parseInt(e['cost']));
                   let esum = formatter.format(eTotal);
+                  let ecost = formatter.format(e['cost']);
 
                   let exp =
                   `<tr><td>${e.name}</td>
                   <td>${e.expense_type}</td>
-                  <td>${e.cost}</td>
-                  <td>${esum}</td></tr>`;
+                  <td id="r">${ecost}</td>
+                  <td id="r">${esum}</td></tr>`;
                   $('#expenses').append(exp);
-
                 })
 
                 let bTotal = 0;
@@ -192,16 +253,39 @@
                 listB.forEach(b => {
                   bTotal+=(parseInt(b['cost']));
                   let sum = formatter.format(bTotal);
+                  let bcost = formatter.format(b['cost']);
 
                   let bills =
                   `<tr><td>${b.company}</td>
                   <td>${b.bill_type}</td>
-                  <td>${b.cost}</td>
-                  <td>${sum}</td></tr>`;
+                  <td id="r">${bcost}</td>
+                  <td id="r">${sum}</td></tr>`;
                   $('#bills').append(bills);
                 })
               }
             })
+
+    //
+    //           var ctx = document.getElementById('myChart').getContext('2d');
+    //           var chart = new Chart(ctx, {
+    //           type: 'doughnut',
+    //           data: {
+    //           labels: ['entertainment', 'restaurants/takeout', 'clothing/cosmetics', 'transportation', 'groceries'],
+    //           datasets: [{
+    //           label: "Expenses",
+    //           backgroundColor: 'rgb(255, 99, 132)',
+    //           borderColor: 'rgb(255, 99, 132)',
+    //           data: [0, 10, 5, 2, 20],
+    //     }]
+    // },
+    //
+    // // Configuration options go here
+    // options: {
+    //   animation.animateScale: true,
+    //
+    // }
+    //             });
+
 
 
         </script>
