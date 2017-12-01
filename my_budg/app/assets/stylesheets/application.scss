@@ -1,10 +1,16 @@
  html {
-   background-color: #ECBCBC;
+   background-color: #EEEEF7;
  }
 
   div {
    margin: 0;
    padding: 0;
+ }
+
+ body {
+   border-left: solid;
+   border-right: solid;
+   border-color: white;
  }
 
 
@@ -13,7 +19,7 @@
   font-family: 'Montserrat Subrayada', sans-serif;
   font-size: 75px;
   color: #263675;
-  margin-bottom: 15px;
+  margin-bottom: 40px;
   margin-left: 30px;
   text-shadow: 3px 3px white;
 
@@ -24,8 +30,8 @@
 }
 
 header {
-  background-image: url("IMG_5021.jpg");
-  background-repeat: no-repeat;
+  background-color: #EEEEF7;
+  margin: 40px;
 
 }
 
@@ -34,11 +40,8 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    // background-image: url("IMG_5021.jpg");
-    min-height: 100px;
+    background-color: #ECBCBC;
 
-
-    // background-color: #DE9EA0;
 }
 
 li {

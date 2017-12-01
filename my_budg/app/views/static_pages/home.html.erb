@@ -1,140 +1,150 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <style media="screen">
+    <meta charset="utf-8">
 
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Merienda|Norican|Sue+Ellen+Francisco|Satisfy|Patrick+Hand+SC|Bad+Script|Cookie|Fredericka+the+Great|Monoton|Arima+Madurai|Bungee+Outline|Caveat|Croissant+One|Delius+Unicase|Ewert|Fredericka+the+Great|Homemade+Apple|Leckerli+One|Open+Sans|Petit+Formal+Script|Raleway|Roboto|Rouge+Script|Sacramento|Sofia" rel="stylesheet">
+
+
+  <style media="screen">
+  }
+
+  form {
+    margin: auto;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+
+  p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 1.2px;
+    text-align: left;
+    color: #001933;
+    padding: 5px;
+  }
+
+  i {
+    padding: 5px;
+  }
+
+  button:focus {
+    outline: 0;
+  }
     * {
       box-sizing: border-box;
     }
 
     body {
-      background-color: #F5E7E7;
       font-family: 'Assistant', sans-serif;
       margin: 0 auto;
       color: #263675;
-
+      background-color: #EEEEF7;
     }
 
-    h1, h2, h3{
+    h1, h2 {
       font-family: 'Stardos Stencil', cursive;
       letter-spacing: 1.5px;
       font-weight: lighter;
       text-shadow: 2px 2px white;
-    }
-
-    th {
-      font-size: 22px;
-      font-weight: bold;
-    }
-
-    td {
-    width: 250px;
-    text-align: left;
-    line-height: 2;
-    color: #263675;
-
-
-    }
-
-    tr {
-      border-bottom: solid;
-      border-bottom-color: lightgrey;
-      border-width: thin;
-      color: #84878A;
-
-
-    }
-
-    h2 a {
-      text-decoration: none;
-    }
-
-    h2 a:hover {
-      text-decoration: none;
-      color: #black;
-    }
-
-    h2 a:visited {
-      color: #003366;
+      color: lightgrey;
     }
 
     h1 {
       text-align: center;
       margin-top: 35px;
       font-size: 44px;
-      color: #263675;
-    }
-
-    h3 {
-      font-size: 44px;
-      margin-top: 35px;
-    }
-
-    section {
-      width: 1000px;
-      line-height: 2;
-      font-size: 20px;
-      float: left;
-      display: inline-block;
-    }
-
-    article {
-      margin: 25px;
-      float: left;
-      display: inline-block;
-      letter-spacing: 1px;
+      color: lightgrey;
+      margin: 50px;
     }
 
     .logo {
       color: #263675;
     }
 
-    .info {
-      font-size: 18px;
-    }
-
-    .footer {
-      text-align: center;
-      clear: both;
-    }
-
-    .user-profile {
-      border-left-style: solid;
-      border-right-style: solid;
-      border-color: white;
-      border-width: medium;
-    }
-
-    #expenses, #bills {
-      width: 1000px;
-    }
-
-    #title {
-      height: 30px;
-      line-height: .5;
-      color: #ADB2B6;
-    }
-
-    #r {
-      text-align: right;
-    }
-
-    #userName {
-      font-size: 30px;
-      border-bottom-style: : none;
-    }
-
-
-
     </style>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <br>
-    <br>
-    <h1>welome to mybudg</h1><br>
-    <p><em>helping you with your grown-up shit</p>
 
+
+
+  <body>
+    <h2>the latest</h2>
+    <form>
+      <button id="bloomberg" type="button">bloomberg</button>
+      <button id="wsj" type="button">wall street journal</button>
+      <button id="nyt" type="button">new york times</button>
+    </form>
+    <main>
+
+    </main>
+    <script src="index.js"></script>
+  </body>
+    <script type="text/javascript">
+          // Page Elements
+
+      const bloomberg = document.getElementById('bloomberg');
+      const wsj = document.getElementById('wsj');
+      const nyt = document.getElementById('nyt');
+      const main = document.getElementsByTagName('main')[0];
+
+      // News API Data
+
+      const apiKey = 'da8f768c619e4244a9dc5a9dd5a799a3';
+      const bloombergUrl = 'https://newsapi.org/v2/top-headlines?sources=bloomberg&apiKey=da8f768c619e4244a9dc5a9dd5a799a3';
+      const wsjUrl = 'https://newsapi.org/v2/top-headlines?sources=the-wall-street-journal&apiKey=da8f768c619e4244a9dc5a9dd5a799a3';
+      const nytUrl = 'https://newsapi.org/v2/top-headlines?sources=the-new-york-times&apiKey=da8f768c619e4244a9dc5a9dd5a799a3';
+
+      async function getNews(url) {
+      	let response = await fetch(url);
+        let jsonResponse = await response.json();
+        let articlesArray = jsonResponse.articles.slice(0, 5);
+      	return articlesArray;
+      }
+
+      // Render Function
+
+      function renderNews(articles) {
+        articles.map((article, index) => {
+          let articleRow =
+            '<div class="articlerow">' +
+            ' <div class="article">' +
+            '   <h2 class="title">' + article.title + '</h2>' +
+            '   <h3>By ' + article.author + '</h3>' +
+            '   <p> ' + article.description + '</p>' +
+            '   <a href="' + article.url + '" target="_blank" class="readmore"><p>more</p></a>' +
+            '   <img class="storyimage" src="' + article.urlToImage + '" />'
+            ' </div>' +
+            '</div>';
+
+          main.innerHTML += articleRow;
+        });
+        return articles;
+      }
+      // Button Event Listeners
+      $(document).ready(function() {
+        main.innerHTML = ' ';
+          getNews(bloombergUrl).then(articlesArray => renderNews(articlesArray))
+      });
+
+      bloomberg.addEventListener('click', function() {
+        main.innerHTML = ' ';
+      		getNews(bloombergUrl).then(articlesArray => renderNews(articlesArray))
+      }, false);
+
+      wsj.addEventListener('click', function() {
+        main.innerHTML = ' ';
+        getNews(wsjUrl).then(articlesArray => renderNews(articlesArray))
+      }, false);
+
+      nyt.addEventListener('click', function() {
+        main.innerHTML = ' ';
+      	getNews(nytUrl).then(articlesArray => renderNews(articlesArray))
+      }, false);
+
+    </script>
   </body>
 </html>
