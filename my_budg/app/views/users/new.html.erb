@@ -5,24 +5,33 @@
   <head>
   <style media="screen">
     body {
-      background-color: #FAFBFC;
+      background-color: #EEEEF7;
+    }
+    .new-user {
+      font-family: 'Rock Salt', cursive;
+    }
+
+    label {
+      font-family: avenir next;
+      font-weight: 100;
+      font-size: 20px;
     }
 
     .row {
-      font-family: 'Open Sans', sans-serif;
+      font-family: avenir next;
       color: #263675;
       font-size: 16px;
     }
 
     .btn {
-      font-family: 'Lora', serif;
+      font-family: avenir next;
+      font-weight: 100;
       background-color: #808080;
       text-align: center;
       font-size: 16px;
     }
-
     h1, h2, h4, h5 {
-      font-family: 'Lora', serif;
+      font-family: 'Rock Salt', cursive;
       color: #808080;
     }
 
@@ -59,7 +68,7 @@
   <body>
     <br><h1>sign up</h1><br><br>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-sm-6 col-sm-offset-3">
           <%= form_for(@user) do |f| %>
             <%= render 'shared/error_messages' %>
 

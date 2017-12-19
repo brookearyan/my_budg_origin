@@ -4,45 +4,19 @@
     <head>
     <style media="screen">
       body {
-        background-color: #FAFBFC;
+        background-color: #EEEEF7;
       }
 
       .row {
-        font-family: 'Open Sans', sans-serif;
         color: #263675;
-        font-size: 16px;
+        font-weight: 100;
       }
 
       .btn {
-        font-family: 'Lora', serif;
+        font-family: avenir next;
         background-color: #808080;
         text-align: center;
-        font-size: 16px;
-      }
-
-      .dropdown {
-        font-family: 'Open Sans', sans-serif;
-        color: #263675;
-        border-color: #263675;
-
-      }
-
-      table {
-        font-family: 'Open Sans', sans-serif;
-        width: 960px;
         font-size: 20px;
-        line-height: 2;
-        margin-top: 20px;
-      }
-
-      td {
-        width: 50%;
-      }
-
-
-      h1, h2, h4, h5 {
-        font-family: 'Lora', serif;
-        color: #808080;
       }
 
       a:hover {
@@ -51,24 +25,55 @@
         color: black;
       }
 
-      h1 {
-        margin-top: 35px;
-        font-size: 24px;
-        text-align: center;
-        color: #C0C0C0;
-      }
 
-      p {
-      font-family: 'Lora', serif;
-      color: #808080;
-      margin-left: 8px;
-      margin-right: 10px;
-      font-size: 18px;
+      h1 {
+        font-family: 'Stardos Stencil', cursive;
+        letter-spacing: 1.5px;
+        font-weight: lighter;
+        text-shadow: 2px 2px lightgrey;
+        text-align: center;
       }
 
       p a {
         color: #263675;
       }
+
+      label {
+        font-weight: 100;
+      }
+
+      section {
+        width: 100%;
+        height: auto;
+        margin-top: 50px;
+      }
+
+      #result {
+        width: 50%;
+        display: inline-block;
+      }
+
+      .bill-form {
+        width: 50%;
+        display: inline-block;
+        float: left;
+        height: auto;
+        font-size: 20px;
+        font-family: avenir next;
+        font-weight: 100;
+      }
+
+      #bill-result {
+        font-family: 'Rock Salt', cursive;
+        font-size: 24px;
+      }
+
+      input {
+        font-family: 'Rock Salt', cursive;
+        font-size: 24px;
+      }
+
+
     </style>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="index.scss">
@@ -76,31 +81,34 @@
     <title>add new bill</title>
   </head>
   <body>
-    <div class="row">
-        <br><h1>add new bill</h1><br>
-        <%= form_for(@bill) do |f| %>
+    <section>
+      <div class="bill-form">
+          <br><h1>add new bill</h1><br>
+          <%= form_for(@bill) do |f| %>
 
-        <%= f.label :company, "company" %>
-        <%= f.text_field :company, class: 'form-control'  %><br>
+          <%= f.label :company, "company" %>
+          <%= f.text_field :company, class: 'form-control'  %><br>
 
-        <%= f.label :cost, "cost" %>
-        <%= f.text_field :cost , class: 'form-control' %><br>
+          <%= f.label :cost, "cost" %>
+          <%= f.text_field :cost , class: 'form-control' %><br>
 
-        <%= f.label :type, "type" %><br>
-        <%= f.select :bill_type, [ 'utilities','rent/mortage','loans', 'credit cards' ] %><br><br>
+          <%= f.label :type, "type" %><br>
+          <%= f.select :bill_type, [ 'utilities','rent/mortage','loans', 'credit cards' ] %><br><br>
 
-        <%= f.label :start_time, "payment due" %>
-        <%= f.text_field :start_time, class: 'form-control'  %><br>
+          <%= f.label :start_time, "payment due" %>
+          <%= f.text_field :start_time, class: 'form-control'  %><br>
 
-        <%= f.hidden_field :user_id, :value => current_user.id %>
+          <%= f.hidden_field :user_id, :value => current_user.id %>
 
-        <%= f.submit "add bill", class: 'btn btn-primary'  %><br>
-        <% end %>
-      </div>
-      <div class="row">
-          <table colspan="2" id="bill-result">
-        </table colspan=>
-      </div>
+          <%= f.submit "add bill", class: 'btn btn-primary'  %><br>
+          <% end %>
+        </div>
+        <div class="row">
+            <table colspan="2" id="bill-result">
+          </table>
+        </div>
+    </section>
+
         <script type="text/javascript" charset="utf-8">
           $(function () {
             $('form').submit(function(e) {

@@ -1,53 +1,71 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <style media="screen">
-    body {
-      background-color: #FAFBFC;
-    }
 
-    .row {
-      font-family: 'Open Sans', sans-serif;
-      color: #263675;
-      font-size: 16px;
-    }
+      <style media="screen">
+        body {
+          background-color: #EEEEF7;
+        }
 
-    .btn {
-      font-family: 'Lora', serif;
-      background-color: #808080;
-      text-align: center;
-      font-size: 16px;
-    }
-    h1, h2, h4, h5 {
-      font-family: 'Lora', serif;
-      color: #808080;
-    }
+        label {
+          font-family: avenir next;
+          font-weight: 100;
+          font-size: 26px;
+        }
 
-    a:hover {
-      text-decoration: none;
-      background-color: #808080;
-      color: black;
-    }
+        input {
+          font-size: 30px;
+        }
 
-    h1 {
-      margin-top: 35px;
-      font-size: 30px;
-      text-align: center;
-      color: #C0C0C0;
-    }
+        .row {
+          font-family: avenir next;
+          color: #263675;
+          font-size: 24px;
+        }
 
-    p {
-    font-family: 'Lora', serif;
-    color: #808080;
-    margin-left: 8px;
-    margin-right: 10px;
-    font-size: 18px;
-    }
+        .btn {
+          font-family: avenir next;
+          font-weight: 100;
+          background-color: #808080;
+          text-align: center;
+          font-size: 20px;
+        }
+        h1, h2, h4, h5 {
+          font-family: 'Rock Salt', cursive;
+          color: #808080;
+        }
 
-    p a {
-      color: #263675;
-    }
-  </style>
+        a:hover {
+          text-decoration: none;
+          background-color: #808080;
+          color: black;
+        }
+
+        h1 {
+          margin-top: 35px;
+          font-size: 30px;
+          text-align: center;
+          color: #C0C0C0;
+        }
+
+
+        p {
+        font-family: 'Rock Salt', cursive;
+        color: #808080;
+        margin-left: 8px;
+        margin-right: 10px;
+        font-size: 20px;
+        }
+
+        p a {
+          color: #263675;
+        }
+
+        form {
+          font-family: 'Rock Salt', cursive;
+          font-size: 26px;
+        }
+        </style>
     <meta charset="utf-8">
     <title></title>
   </head>
@@ -55,8 +73,8 @@
     <% provide(:title, "log in") %>
     <br><h1>log in</h1><br><br>
 
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="user-form">
         <%= form_for(:session, url: login_path) do |f| %>
 
           <%= f.label :email, "email" %>

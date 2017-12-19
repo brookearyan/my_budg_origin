@@ -4,24 +4,19 @@
     <head>
     <style media="screen">
       body {
-        background-color: #FAFBFC;
+        background-color: #EEEEF7;
       }
 
       .row {
-        font-family: 'Open Sans', sans-serif;
         color: #263675;
-        font-size: 16px;
+        font-weight: 100;
       }
 
       .btn {
-        font-family: 'Lora', serif;
+        font-family: avenir next;
         background-color: #808080;
         text-align: center;
-        font-size: 16px;
-      }
-      h1, h2, h4, h5 {
-        font-family: 'Lora', serif;
-        color: #808080;
+        font-size: 20px;
       }
 
       a:hover {
@@ -30,60 +25,80 @@
         color: black;
       }
 
-      table {
-        font-family: 'Open Sans', sans-serif;
-        width: 960px;
-        font-size: 20px;
-        line-height: 2;
-        margin-top: 20px;
-      }
-
-      td {
-        width: 50%;
-      }
 
       h1 {
-        margin-top: 24px;
-        font-size: 30px;
+        font-family: 'Stardos Stencil', cursive;
+        letter-spacing: 1.5px;
+        font-weight: lighter;
+        text-shadow: 2px 2px lightgrey;
         text-align: center;
-        color: #C0C0C0;
-      }
-
-      p {
-      font-family: 'Lora', serif;
-      color: #808080;
-      margin-left: 8px;
-      margin-right: 10px;
-      font-size: 18px;
       }
 
       p a {
         color: #263675;
       }
+
+      label {
+        font-weight: 100;
+      }
+
+      section {
+        width: 100%;
+        height: auto;
+        margin-top: 50px;
+      }
+
+      #result {
+        width: 50%;
+        display: inline-block;
+      }
+
+      .expense-form {
+        width: 50%;
+        display: inline-block;
+        float: left;
+        height: auto;
+        font-size: 20px;
+        font-family: avenir next;
+        font-weight: 100;
+      }
+
+      #expense-result {
+        font-family: 'Rock Salt', cursive;
+        font-size: 24px;
+      }
+
+      input {
+        font-family: 'Rock Salt', cursive;
+        font-size: 24px;
+      }
+
+
     </style>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="index.scss">
-      <meta charset="utf-8">
     <title>add new expense</title>
   </head>
       <body>
-        <div class="row">
-          <br><h1>add new expense</h1><br>
-            <%= form_for(@expense) do |f| %>
-            <%= f.label :name, "name" %>
-            <%= f.text_field :name, class: 'form-control'  %><br>
-            <%= f.select :expense_type, [ 'entertainment', 'restaurants/takeout', 'clothing/cosmetics', 'transportation', 'groceries' ] %>
-            <br><br><%= f.label :cost, "cost" %>
-            <%= f.text_field :cost, class: 'form-control'  %><br>
-            <%= f.label :start_time, "payment due" %>
-            <%= f.text_field :start_time, class: 'form-control'  %><br>
-            <%= f.hidden_field :user_id, :value => current_user.id %>
-            <%= f.submit "add expense" , class: 'btn btn-primary' %><br>
-            <% end %>
-        </div>
-          <table colspan="2" id="expense-result"></table>
-        </div>
-        <script type="text/javascript" charset="utf-8">
+        <section>
+          <div class="expense-form">
+            <br><h1>add new expense</h1><br>
+              <%= form_for(@expense) do |f| %>
+              <%= f.label :name, "name" %>
+              <%= f.text_field :name, class: 'form-control'  %><br>
+              <%= f.select :expense_type, [ 'entertainment', 'restaurants/takeout', 'clothing/cosmetics', 'transportation', 'groceries' ] %>
+              <br><br><%= f.label :cost, "cost" %>
+              <%= f.text_field :cost, class: 'form-control'  %><br>
+              <%= f.label :start_time, "payment due" %>
+              <%= f.text_field :start_time, class: 'form-control'  %><br>
+              <%= f.hidden_field :user_id, :value => current_user.id %>
+              <%= f.submit "add expense" , class: 'btn btn-primary' %><br>
+              <% end %>
+          </div id="result">
+            <table colspan="2" id="expense-result"></table>
+          </div>
+      </section>
+
+        <script type="text/javascript">
           $(function () {
             $('form').submit(function(event) {
 
@@ -99,7 +114,7 @@
                   <td colspan="2">${posting.name}</td>
                 </tr>
                 <tr>
-                  <td> type: </td><td>${posting.expense_type}</td>
+                  <td> type: </td><td>${posting.expense_type},  </td>
                   <td> cost: </td><td>${posting.cost}</td>
                </tr>`;
                 $('#expense-result').append(markup);

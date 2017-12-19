@@ -103,11 +103,13 @@
         border-right-style: solid;
         border-color: white;
         border-width: medium;
+
       }
 
       #user-info {
         padding: 20px;
         margin: 20px;
+        float: left;
       }
 
       #expenses, #bills {
@@ -129,13 +131,15 @@
         border-bottom-style: : none;
       }
 
-
+      canvas {
+        float: right;
+        margin: 0px;
+      }
 
     </style>
     <!-- <meta charset="utf-6"> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="/user.js" type="text/javascript">
 
     </script>
     <title></title>
@@ -148,7 +152,9 @@
           <h1 id="title">your profile</h1><br>
           <table colspan="4" id="user"></table>
         </article>
-        <canvas id="myChart"></canvas>
+        <article class="chart">
+          <canvas id="myChart"></canvas>
+        </article>
       </section><br><br>
       <section>
           <article class="exp-info">
@@ -286,30 +292,29 @@
                   <td id="r">${sum}</td></tr>`;
                   $('#bills').append(bills);
                 })
-              }
-            })
-
-    //
-    //           var ctx = document.getElementById('myChart').getContext('2d');
-    //           var chart = new Chart(ctx, {
-    //           type: 'doughnut',
-    //           data: {
-    //           labels: ['entertainment', 'restaurants/takeout', 'clothing/cosmetics', 'transportation', 'groceries'],
-    //           datasets: [{
-    //           label: "Expenses",
-    //           backgroundColor: 'rgb(255, 99, 132)',
-    //           borderColor: 'rgb(255, 99, 132)',
-    //           data: [0, 10, 5, 2, 20],
-    //     }]
-    // },
-    //
-    // // Configuration options go here
-    // options: {
-    //   animation.animateScale: true,
-    //
-    // }
-    //             });
-
+                  var ctx = document.getElementById('myChart').getContext('2d');
+                  var chart = new Chart(ctx, {
+                  type: 'doughnut',
+                  data: {
+                  labels: ['bills', 'disposible', 'expenses'],
+                  datasets: [{
+                  label: "expenses",
+                  backgroundColor: 'white',
+                  borderColor: 'lightgrey',
+                  hoverColor: 'grey',
+                  data: [803, 7885, 2175],
+              }]
+            },
+            // Configuration options go here
+            options: {
+              legend: {
+                display: false,
+                position: "bottom",
+              },
+            }
+        });
+      }
+    })
 
 
         </script>
