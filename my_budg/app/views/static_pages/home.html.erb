@@ -31,12 +31,13 @@
   }
 
 #bloomberg, #nyt, #wsj {
+    width: 33%;
     display: inline-block;
     color: lightgrey;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 22px;
+    font-size: 1.75vw;
     font-family: 'Rock Salt', cursive;
     font-weight: 100;
     letter-spacing: 1px;
@@ -77,24 +78,28 @@
 
     }
 
-    h2 {
-      margin-bottom: 40px;
+    .title {
+      font-size: 2vw;
       border-bottom: solid;
+      width: 100%;
       border-color: lightgrey;
       border-bottom-width: thin;
-      padding: 15px;
+      padding: 4vw;
       font-family: 'Rock Salt', cursive;
 
 
     }
 
-    img {
-      width: 450px;
+    .storyimage {
+      width: 50%;
       height: auto;
-      margin: 50px;
-      float: left
+      float: left;
+      padding: 5vw;
     }
 
+    .storytext {
+      padding: 3vw;
+    }
     h3, p {
       display: inline-block;
       width: 50%;
@@ -103,9 +108,11 @@
 
     }
 
-    .article {
+    .story {
       clear: both;
       min-height: 550px;
+      margin: 2vw;
+      background-color: white;
     }
 
     .logo {
@@ -114,7 +121,7 @@
 
     #news-nav {
       background-color: inherit;
-      margin-bottom: 120px;
+      width: 100%;
     }
 
     #latest {
@@ -170,12 +177,14 @@
         articles.map((article, index) => {
           let articleRow =
             '<div class="articlerow">' +
-            ' <div class="article">' +
+            ' <div class="story">' +
             '   <h2 class="title">' + article.title + '</h2>' +
             '   <img class="storyimage" src="' + article.urlToImage + '" />' +
-            '   <h3>By ' + article.author + '</h3>' +
-            '   <p> ' + article.description + '</p>' +
-            '   <a href="' + article.url + '" target="_blank" class="readmore"><p>more</p></a>' +
+            '   <div class="storytext" >' +
+            '     <h3>By ' + article.author + '</h3>' +
+            '     <p> ' + article.description + '</p>' +
+            '     <a href="' + article.url + '" target="_blank" class="readmore"><p>more</p></a>' +
+            '   </div>' +
             ' </div>' +
             '</div>';
 

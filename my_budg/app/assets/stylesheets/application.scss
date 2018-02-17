@@ -2,6 +2,12 @@
    background-color: #EEEEF7;
  }
 
+ * {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+ }
+
   div {
    margin: 0;
    padding: 0;
@@ -17,12 +23,11 @@
 .logo {
   text-align: left;
   font-family: 'Montserrat Subrayada', sans-serif;
-  font-size: 75px;
+  font-size: 5vw;
   color: #263675;
   margin-bottom: 40px;
   margin-left: 30px;
   text-shadow: 3px 3px white;
-
 
 }
 
