@@ -16,20 +16,19 @@
    border-right: solid;
    border-color: white;
  }
- .container {
-   margin: 0vw 15vw;
+ a:active, a::selection, a:focus, a:hover{
+   text-decoration: none;
+   outline: none;
  }
-
 
 .logo {
   text-align: left;
   font-family: 'Montserrat Subrayada', sans-serif;
-  font-size: 5vw;
+  font-size: 6vw;
   color: #263675;
   margin-bottom: 40px;
   margin-left: 30px;
   text-shadow: 3px 3px white;
-
 }
 
 .nav {
@@ -37,17 +36,15 @@
 
 header {
   background-color: #EEEEF7;
-  margin: 40px;
+  margin: 5vw 10vw;
 
 }
-
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #ECBCBC;
-
 }
 
 li {
@@ -57,11 +54,11 @@ li {
 
 li a {
     display: block;
-    color: #263675;
+    color: #grey;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 22px;
+    font-size: 1.75vw;
     font-family: avenir next;
     font-weight: 100;
     letter-spacing: 1px;
@@ -73,11 +70,11 @@ li a {
 
 li a:hover {
   text-decoration: none;
-
+  color: grey;
 }
 
 
-h1 a:hover {
+h1 a:hover, a:active, a:focus, a:visited {
   text-decoration: none;
   color: black;
 }

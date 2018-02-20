@@ -15,6 +15,10 @@
         margin: 0 auto;
         color: #263675;
       }
+      .container {
+        width: 100%;
+        padding: 3vw 10vw 2vw 10vw;
+      }
 
 /*----- titles, and footer links ----*/
       h1, h2, h3{
@@ -32,7 +36,7 @@
 /*-----*/
 
       th {
-        font-size: 22px;
+        font-size: 1vw;
         font-weight: bold;
       }
       td {
@@ -108,27 +112,24 @@
         border-right-style: solid;
         border-color: white;
         border-width: medium;
-
       }
-
       #user-info {
+        font-size: 1.25vw;
         width: 50%;
         float: left;
+        padding: 3vw;
       }
-
-      #expenses, #bills {
-        width: 1000px;
+      .expense-info, .bill-info {
+        font-size: 1.25vw;
+        padding: 3vw;
       }
-
-
       #r {
         text-align: right;
       }
-
       .chart {
         float: right;
         margin: 0px;
-        padding: 0;
+        padding: 2vw 4vw 0vw 2vw;
         width: 50%;
       }
 
@@ -136,184 +137,182 @@
     <!-- <meta charset="utf-6"> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
     </script>
-    <title></title>
   </head>
-  <body>
-    <% provide(:title, @user.name) %>
-    <div class="user-profile">
-      <section class="topper">
-        <article id="user-info">
-          <h1 id="title">your profile</h1><br>
-          <table colspan="4" id="user"></table>
-        </article>
-        <article class="chart">
-          <canvas id="myChart"></canvas>
-        </article>
-      </section><br><br>
-      <section>
-          <article class="exp-info">
-            <h3 id='title'>expenses</h3>
+<body>
+  <% provide(:title, @user.name) %>
+  <div class="user-profile">
+    <section class="topper">
+      <article id="user-info">
+        <h1 id="title">your profile</h1><br>
+        <table colspan="4" id="user"></table>
+      </article>
+      <article class="chart">
+        <canvas id="myChart"></canvas>
+      </article>
+    </section><br><br>
+    <article class="expense-info">
+      <h3 id='title'>expenses</h3>
+      <table colspan="4" id="expenses">
+        <row>
+          <th>name</th>
+          <th>type</th>
+          <th id="r">cost</th>
+          <th id="r">current total</th>
+        </row>
+      </table>
+    </article>
+    <article class="bill-info">
+      <h3 id='title'>bills</h3>
+      <table colspan="4" id="bills">
+        <row>
+          <th>company</th>
+          <th>type</th>
+          <th id="r">cost</th>
+          <th id="r">current total</th>
+        </row>
+      </table>
+    </section>
+  </div>
+  <div class="footer">
+    <h2>
+      <%= link_to "add expenses", new_expense_path(current_user) %> |
+      <%= link_to "add bills", new_bill_path(current_user) %>
+    </h2>
+  </div>
 
-          <table colspan="4" id="expenses">
-              <row>
-                <th>name</th>
-                <th>type</th>
-                <th id="r">cost</th>
-                <th id="r">current total</th>
-              </row>
-          </table>
-        </article>
-      </section>
+  <script>
+    $(document).ready(function(){
+      const url = window.location.href;
+      fetch(url,
+        { headers :
+          { 'Content-Type': 'application/json',
+          'Accept': 'application/json'
+          }
+        })
+        .then(res => res.json())
+        .then(json => userCont(json));
 
-      <section>
-        <article class="bill-info">
-          <h3 id='title'>bills</h3>
-
-          <table colspan="4" id="bills">
-              <row>
-                <th>company</th>
-                <th>type</th>
-                <th id="r">cost</th>
-                <th id="r">current total</th>
-              </row>
-          </table>
-        </article>
-      </section>
-
-
-        <div class="footer">
-          <h2><%= link_to "add expenses", new_expense_path(current_user) %> |
-          <%= link_to "add bills", new_bill_path(current_user) %></h2>
-        </div>
-    </div>
-        <script>
-          $(document).ready(function(){
-            const url = window.location.href;
-            fetch(url, { headers :
-              { 'Content-Type': 'application/json',
-                'Accept': 'application/json' }
-                })
-                .then(res => res.json())
-                .then(json => userCont(json));
-
-              function userCont(json) {
-                var formatter = new Intl.NumberFormat('en-US', {
-                  style: 'currency',
-                  currency: 'USD',
-                  minimumFractionDigits: 2,
-                });
-
-
-                let income = formatter.format(json.income);
-                let afterTax = Math.floor(json['income']*=.65);
-                let monthly = Math.floor(afterTax/12);
-
-                let afterTaxF = formatter.format(afterTax);
-                let monthlyF = formatter.format(monthly);
-
-
-                const userInfo =
-                `<tr>
-                <td> email: </td><td>${json.email}</td>
-                </tr>
-                <tr>
-                <td> password: </td><td> *********** </td>
-                </tr>
-                </tr>
-                <td> zipcode: </td><td>${json.zipcode}</td>
-                <tr>
-                </tr>
-                <td> annual income: </td><td>${income}</td>
-                <tr>
-                </tr>
-                <td> after-tax income: </td><td>${afterTaxF}</td>
-                <tr>
-                </tr>
-                <td> gross income: </td><td>${monthlyF}</td>
-                <tr>`;
-                $('#user').append(userInfo);
-
-                let list = json['expenses'];
-
-                const expTypes = ['entertainment', 'restaurants/takeout', 'clothing/cosmetics', 'transportation', 'groceries'];
-
-                let listB = json['bills'];
-
-                let debits = list.concat(listB);
-
-                let dTotal = 0;
-
-                debits.forEach(d => {
-                  dTotal+=(parseInt(d['cost']));
-                })
-                let disposible = monthly - dTotal;
-                let disposibleF = formatter.format(disposible);
-                let disWeekly = formatter.format(disposible/4);
-
-                let debitTotal = `<tr>
-                <td> disposible income: </td><td>${disposibleF}</td>
-                </tr><tr>
-                <td> weekly disposible: </td><td>${disWeekly}</td>
-                </tr>`;
-                $('#user').append(debitTotal);
-
-                  let eTotal = 0;
-
-                list.forEach(e => {
-                  eTotal+=(parseInt(e['cost']));
-                  let esum = formatter.format(eTotal);
-                  let ecost = formatter.format(e['cost']);
-
-                  let exp =
-                  `<tr><td>${e.name}</td>
-                  <td>${e.expense_type}</td>
-                  <td id="r">${ecost}</td>
-                  <td id="r">${esum}</td></tr>`;
-                  $('#expenses').append(exp);
-                })
-
-                let bTotal = 0;
-
-                listB.forEach(b => {
-                  bTotal+=(parseInt(b['cost']));
-                  let sum = formatter.format(bTotal);
-                  let bcost = formatter.format(b['cost']);
-
-                  let bills =
-                  `<tr><td>${b.company}</td>
-                  <td>${b.bill_type}</td>
-                  <td id="r">${bcost}</td>
-                  <td id="r">${sum}</td></tr>`;
-                  $('#bills').append(bills);
-                })
-                  var ctx = document.getElementById('myChart').getContext('2d');
-                  var chart = new Chart(ctx, {
-                  type: 'doughnut',
-                  data: {
-                  labels: ['bills', 'disposible', 'expenses'],
-                  datasets: [{
-                  label: "expenses",
-                  backgroundColor: 'white',
-                  borderColor: 'lightgrey',
-                  hoverColor: 'grey',
-                  data: [803, 7885, 2175],
-              }]
-            },
-            // Configuration options go here
-            options: {
-              legend: {
-                display: false,
-                position: "bottom",
-              },
-            }
+      function userCont(json) {
+        var formatter = new Intl.NumberFormat('en-US',
+        {
+          style: 'currency',
+          currency: 'USD',
+          minimumFractionDigits: 2,
         });
-      }
-    })
+
+        let income = formatter.format(json.income);
+        let afterTax = Math.floor(json['income']*=.65);
+        let monthly = Math.floor(afterTax/12);
+        let afterTaxF = formatter.format(afterTax);
+        let monthlyF = formatter.format(monthly);
+
+        const userInfo =
+          `<tr>
+            <td> email: </td><td>${json.email}</td>
+          </tr>
+          <tr>
+            <td> password: </td><td> *********** </td>
+          </tr>
+          </tr>
+            <td> zipcode: </td><td>${json.zipcode}</td>
+          <tr>
+          </tr>
+            <td> annual income: </td><td>${income}</td>
+          <tr>
+          </tr>
+            <td> after-tax income: </td><td>${afterTaxF}</td>
+          <tr>
+          </tr>
+            <td> gross income: </td><td>${monthlyF}</td>
+          <tr>`;
+          $('#user').append(userInfo);
+
+        let list = json['expenses'];
+
+        const expTypes = ['entertainment', 'restaurants/takeout', 'clothing/cosmetics', 'transportation', 'groceries'];
+
+        let listB = json['bills'];
+
+        let debits = list.concat(listB);
+//debit total; bills & expenses
+        let dTotal = 0;
+
+        debits.forEach(d => {
+          dTotal+=(parseInt(d['cost']));
+        })
+        let disposible = monthly - dTotal;
+        let disposibleF = formatter.format(disposible);
+        let disWeekly = formatter.format(disposible/4);
+
+        let debitTotal =
+          `<tr>
+            <td> disposible income: </td><td>${disposibleF}</td>
+          </tr>
+          <tr>
+            <td> weekly disposible: </td><td>${disWeekly}</td>
+          </tr>`;
+        $('#user').append(debitTotal);
+
+        let eTotal = 0;
+
+        list.forEach(e => {
+          eTotal+=(parseInt(e['cost']));
+          let esum = formatter.format(eTotal);
+          let ecost = formatter.format(e['cost']);
+
+          let exp =
+          `<tr><td>${e.name}</td>
+          <td>${e.expense_type}</td>
+          <td id="r">${ecost}</td>
+          <td id="r">${esum}</td></tr>`;
+          $('#expenses').append(exp);
+        })
+
+        let bTotal = 0;
+
+        listB.forEach(b => {
+          bTotal+=(parseInt(b['cost']));
+          let sum = formatter.format(bTotal);
+          let bcost = formatter.format(b['cost']);
+
+          let bills =
+            `<tr><td>${b.company}</td>
+            <td>${b.bill_type}</td>
+            <td id="r">${bcost}</td>
+            <td id="r">${sum}</td></tr>`;
+            $('#bills').append(bills);
+          })
+
+          var myData = [disposible, eTotal, bTotal];
+//CHART DATA, FORMATTED
+
+          var ctx = document.getElementById('myChart').getContext('2d');
+          var chart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+            labels: ['disposible', 'expenses', 'bills'],
+            datasets: [{
+            label: "expenses",
+            backgroundColor: 'white',
+            borderColor: 'lightgrey',
+            hoverColor: 'grey',
+            data: myData,
+          }]
+        },
+        // Configuration options go here
+        options: {
+          legend: {
+            display: false,
+            position: "bottom",
+          },
+        }
+      });
+    }
+  })
 
 
-        </script>
+  </script>
 
 
   </body>
