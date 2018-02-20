@@ -1,13 +1,11 @@
  html {
    background-color: #EEEEF7;
  }
-
  * {
    box-sizing: border-box;
    margin: 0;
    padding: 0;
  }
-
   div {
    margin: 0;
    padding: 0;
@@ -17,6 +15,9 @@
    border-left: solid;
    border-right: solid;
    border-color: white;
+ }
+ .container {
+   margin: 0vw 15vw;
  }
 
 

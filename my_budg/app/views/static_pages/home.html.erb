@@ -2,140 +2,93 @@
 <html>
   <head>
     <meta charset="utf-8">
-
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Merienda|Norican|Sue+Ellen+Francisco|Satisfy|Patrick+Hand+SC|Bad+Script|Cookie|Fredericka+the+Great|Monoton|Arima+Madurai|Bungee+Outline|Caveat|Croissant+One|Delius+Unicase|Ewert|Fredericka+the+Great|Homemade+Apple|Leckerli+One|Open+Sans|Petit+Formal+Script|Raleway|Roboto|Rouge+Script|Sacramento|Sofia" rel="stylesheet">
-
-
   <style media="screen">
-  }
-
-  form {
-    margin: auto;
-    text-align: center;
-    margin-bottom: 5px;
-  }
-
-  p {
-    font-family: avenir next;
-    font-size: 22px;
-    line-height: 1.5;
-    letter-spacing: 1.2px;
-    text-align: left;
-    color: #001933;
-    padding: 5px;
-  }
-
-  i {
-    padding: 5px;
-  }
-
-#bloomberg, #nyt, #wsj {
-    width: 33%;
-    display: inline-block;
-    color: lightgrey;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 1.75vw;
-    font-family: 'Rock Salt', cursive;
-    font-weight: 100;
-    letter-spacing: 1px;
-    border-bottom: solid;
-    border-bottom-width: thin;
-    border-color: lightgrey;
-
-  }
-
-  button:focus {
-    outline: 0;
-  }
+    /*----- GENERAL SETTINGS ------*/
     * {
       box-sizing: border-box;
     }
-
-      body {
+    body {
       margin: 0 auto;
       color: #263675;
       background-color: #EEEEF7;
     }
-
-    h1, h2 {
-      font-family: 'Stardos Stencil', cursive;
-      letter-spacing: 1.5px;
-      font-weight: lighter;
-      text-shadow: 2px 2px white;
-      color: grey;
-      text-align: center;
-      margin-top: 100px:
-
+    button:focus {
+      outline: 0;
     }
+    /* ------ */
 
-    h1 {
-      margin-top: 35px;
-      font-size: 44px;
-      margin: 50px;
-
-    }
-
-    .title {
-      font-size: 2vw;
-      border-bottom: solid;
-      width: 100%;
-      border-color: lightgrey;
-      border-bottom-width: thin;
-      padding: 4vw;
-      font-family: 'Rock Salt', cursive;
-
-
-    }
-
-    .storyimage {
-      width: 50%;
-      height: auto;
-      float: left;
-      padding: 5vw;
-    }
-
-    .storytext {
-      padding: 3vw;
-    }
-    h3, p {
-      display: inline-block;
-      width: 50%;
-      font-family: avenir next;
-      font-weight: 100;
-
-    }
-
-    .story {
-      clear: both;
-      min-height: 550px;
-      margin: 2vw;
-      background-color: white;
-    }
-
-    .logo {
-      color: #263675;
-    }
-
+    /*----- NEWS NAV BAR AND TITLE -----*/
     #news-nav {
       background-color: inherit;
       width: 100%;
     }
-
+    #bloomberg, #nyt, #wsj {
+      width: 33%;
+      display: inline-block;
+      color: #000033;
+      text-align: center;
+      padding: 1.5vw;
+      text-decoration: none;
+      font-size: 1.5vw;
+      font-family: 'Rock Salt', cursive;
+      font-weight: 100;
+      letter-spacing: 1px;
+      border-bottom: solid;
+      border-bottom-width: thin;
+      border-color: lightgrey;
+    }
     #latest {
       font-family: avenir next;
-      color: lightgrey;
+      font-size: 4vw;
+      color: #77778E;
+      text-align: center;
       text-shadow: none;
-      letter-spacing: 5px;
+      letter-spacing: .5vw;
+      padding: 2vw;
+      font-weight: 100;
     }
+    /* ------ */
 
-
+    /*----- NEWS ARTICLES -----*/
+    .story {
+      clear: both;
+      background-color: white;
+      overflow: auto;
+      margin-bottom: 1vw;
+    }
+    .storyimage {
+      width: 50%;
+      height: auto;
+      float: left;
+      padding: 2vw;
+    }
+    .title {
+      width: 100%;
+      font-family: 'Rock Salt', cursive;
+      font-size: 1.5vw;
+      letter-spacing: .1vw;
+      text-align: center;
+      color: grey;
+      line-height: 2;
+      border-bottom: solid;
+      border-color: lightgrey;
+      border-bottom-width: thin;
+      padding: 2vw;
+    }
+    .storytext {
+      padding: 3vw;
+    }
+    .storytext h3, p {
+      display: inline-block;
+      width: 50%;
+      font-family: avenir next;
+      font-weight: 100;
+      font-size: 1.5vw;
+    }
+    /* ------ */
     </style>
-
-
-
   <body>
     <ul id="news-nav">
       <li id="bloomberg" type="li">bloomberg</li>
@@ -143,22 +96,16 @@
       <li id="nyt" type="li">new york times</li>
     </ul>
     <h1 id="latest">the latest</h1>
-
     <main>
-
     </main>
-    <script src="index.js"></script>
   </body>
     <script type="text/javascript">
-          // Page Elements
-
+// Page Elements
       const bloomberg = document.getElementById('bloomberg');
       const wsj = document.getElementById('wsj');
       const nyt = document.getElementById('nyt');
       const main = document.getElementsByTagName('main')[0];
-
-      // News API Data
-
+// News API Data
       const apiKey = 'da8f768c619e4244a9dc5a9dd5a799a3';
       const bloombergUrl = 'https://newsapi.org/v2/top-headlines?sources=bloomberg&apiKey=da8f768c619e4244a9dc5a9dd5a799a3';
       const wsjUrl = 'https://newsapi.org/v2/top-headlines?sources=the-wall-street-journal&apiKey=da8f768c619e4244a9dc5a9dd5a799a3';
@@ -170,9 +117,7 @@
         let articlesArray = jsonResponse.articles.slice(0, 5);
       	return articlesArray;
       }
-
-      // Render Function
-
+// Render Function
       function renderNews(articles) {
         articles.map((article, index) => {
           let articleRow =
@@ -187,12 +132,11 @@
             '   </div>' +
             ' </div>' +
             '</div>';
-
           main.innerHTML += articleRow;
         });
         return articles;
       }
-      // Button Event Listeners
+// Button Event Listeners
       $(document).ready(function() {
         main.innerHTML = ' ';
           getNews(bloombergUrl).then(articlesArray => renderNews(articlesArray))
@@ -212,7 +156,6 @@
         main.innerHTML = ' ';
       	getNews(nytUrl).then(articlesArray => renderNews(articlesArray))
       }, false);
-
     </script>
   </body>
 </html>
