@@ -48,11 +48,6 @@
         margin: 0;
       }
 
-      .edit_user {
-        width: 100%;
-        padding: 1vw 25vw;
-      }
-
       #expense-result {
         width: 50%;
         display: inline-block;
@@ -115,7 +110,7 @@
               <%= f.hidden_field :user_id, :value => current_user.id %>
               <%= f.submit "add expense" , class: 'submit' %><br>
               <% end %>
-          </div id="result">
+          </div>
             <div id="expense-result">
               <h1 id="new-exp-title">new additions</h1>
             </div>
