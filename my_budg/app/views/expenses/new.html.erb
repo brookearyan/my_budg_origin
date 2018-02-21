@@ -6,51 +6,67 @@
       body {
         background-color: #EEEEF7;
       }
-
-      .row {
-        color: #263675;
-        font-weight: 100;
-      }
-
-      .btn {
-        font-family: avenir next;
-        background-color: #808080;
-        text-align: center;
-        font-size: 20px;
-      }
-
-      a:hover {
-        text-decoration: none;
-        background-color: #808080;
-        color: black;
-      }
-
-
-      h1 {
-        font-family: 'Stardos Stencil', cursive;
-        letter-spacing: 1.5px;
-        font-weight: lighter;
-        text-shadow: 2px 2px lightgrey;
-        text-align: center;
-      }
-
-      p a {
-        color: #263675;
-      }
-
-      label {
-        font-weight: 100;
-      }
-
-      section {
+      .container {
         width: 100%;
-        height: auto;
-        margin-top: 50px;
+        padding: 2vw 12vw 2vw 12vw;
+        margin: 0;
+      }
+      #new-exp-title {
+        font-size: 2vw;
+        font-family: avenir next;
+        font-weight: 100;
+        letter-spacing: .25vw;
+        border-bottom: solid .5px white;
+        padding: 0vw 0vw 1vw 0vw;
+
+      }
+      #expense-header {
+        width: 100%;
+        padding: 0vw 3vw 3vw 3vw;
+        color: #grey;
+        font-family: avenir next;
+        font-weight: 100;
+        text-align: center;
+        margin-bottom: 1.5vw;
+
+      }
+      .expense-form label {
+        font-family: avenir next;
+        font-weight: 100;
+        font-size: 1.5vw;
+        letter-spacing: .1vw;
+        margin: 0;
+        padding: .5vw;
+      }
+      h1 {
+        font-family: 'Rock Salt', cursive;
+        font-size: 2.25vw;
+        text-align: center;
+        color: #C0C0C0;
+        letter-spacing: .2vw;
+        padding: 2vw;
+        margin: 0;
       }
 
-      #result {
+      .edit_user {
+        width: 100%;
+        padding: 1vw 25vw;
+      }
+
+      #expense-result {
         width: 50%;
         display: inline-block;
+        padding: 1.5vw;
+      }
+
+      h2, h3 {
+        padding: 1vw;
+        width: 100%;
+        font-family: avenir next;
+        font-weight: 100;
+        font-size: 1.2vw;
+        letter-spacing: .1vw;
+        margin: 0;
       }
 
       .expense-form {
@@ -58,19 +74,22 @@
         display: inline-block;
         float: left;
         height: auto;
-        font-size: 20px;
-        font-family: avenir next;
         font-weight: 100;
-      }
+        padding: 2vw;
+        background-color: lightgrey;
 
-      #expense-result {
-        font-family: 'Rock Salt', cursive;
-        font-size: 24px;
       }
-
-      input {
-        font-family: 'Rock Salt', cursive;
-        font-size: 24px;
+      select {
+        margin-top: 2vw;
+        margin-left: 2.5%;
+        font-family: avenir next;
+        font-size: 1.5vw;
+        height: 4vw;
+        width: 95%;
+        align-items: center;
+      }
+      #last-row {
+        border-bottom: solid 1px grey;
       }
 
 
@@ -80,43 +99,42 @@
   </head>
       <body>
         <section>
+          <article id="expense-header">
+            <h1>add new expenses</h1>
+            <p> expenses are one-time allowances that have been made this month. please add regular monthly expenses like utilities bills.</p>
+          </article>
           <div class="expense-form">
-            <br><h1>add new expense</h1><br>
               <%= form_for(@expense) do |f| %>
               <%= f.label :name, "name" %>
-              <%= f.text_field :name, class: 'form-control'  %><br>
+              <%= f.text_field :name, class: 'input'  %><br>
               <%= f.select :expense_type, [ 'entertainment', 'restaurants/takeout', 'clothing/cosmetics', 'transportation', 'groceries' ] %>
               <br><br><%= f.label :cost, "cost" %>
-              <%= f.text_field :cost, class: 'form-control'  %><br>
+              <%= f.text_field :cost, class: 'input'  %><br>
               <%= f.label :start_time, "payment due" %>
-              <%= f.text_field :start_time, class: 'form-control'  %><br>
+              <%= f.text_field :start_time, class: 'input'  %><br>
               <%= f.hidden_field :user_id, :value => current_user.id %>
-              <%= f.submit "add expense" , class: 'btn btn-primary' %><br>
+              <%= f.submit "add expense" , class: 'submit' %><br>
               <% end %>
           </div id="result">
-            <table colspan="2" id="expense-result"></table>
+            <div id="expense-result">
+              <h1 id="new-exp-title">new additions</h1>
+            </div>
           </div>
       </section>
 
         <script type="text/javascript">
           $(function () {
             $('form').submit(function(event) {
-
               event.preventDefault();
-
               var values = $(this).serialize();
-
               var posting = $.post('/expenses', values);
 
               posting.done(posting => {
                 let markup =
-                `<tr>
-                  <td colspan="2">${posting.name}</td>
-                </tr>
-                <tr>
-                  <td> type: </td><td>${posting.expense_type},  </td>
-                  <td> cost: </td><td>${posting.cost}</td>
-               </tr>`;
+                `<h2>${posting.name}</h2>
+                <h3> type: ${posting.expense_type}</h3>
+                <h3 id="last-row"> cost: $${posting.cost}</h3>`;
+
                 $('#expense-result').append(markup);
               });
               $('form')[0].reset();

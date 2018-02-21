@@ -7,58 +7,27 @@
     body {
       background-color: #EEEEF7;
     }
-    .user-form {
-      font-family: 'Rock Salt', cursive;
-    }
-
-    label {
+    .edit_user label {
       font-family: avenir next;
       font-weight: 100;
-      font-size: 20px;
-    }
-
-    .row {
-      font-family: avenir next;
-      color: #263675;
-      font-size: 16px;
-    }
-
-    .btn {
-      font-family: avenir next;
-      font-weight: 100;
-      background-color: #808080;
-      text-align: center;
-      font-size: 16px;
-    }
-    h1, h2, h4, h5 {
-      font-family: 'Rock Salt', cursive;
-      color: #808080;
-    }
-
-    a:hover {
-      text-decoration: none;
-      background-color: #808080;
-      color: black;
+      font-size: 1.5vw;
+      letter-spacing: .1vw;
+      margin: 0;
+      padding: .5vw;
     }
 
     h1 {
-      margin-top: 35px;
-      font-size: 30px;
+      font-family: 'Rock Salt', cursive;
+      margin-top: 5vw;
+      font-size: 2vw;
       text-align: center;
       color: #C0C0C0;
     }
-
-    p {
-    font-family: 'Lora', serif;
-    color: #808080;
-    margin-left: 8px;
-    margin-right: 10px;
-    font-size: 18px;
+    .edit_user {
+      width: 100%;
+      padding: 1vw 25vw;
     }
 
-    p a {
-      color: #263675;
-    }
   </style>
     <meta charset="utf-8">
     <title></title>
@@ -67,33 +36,30 @@
 
 <% provide(:title, "edit user") %>
 <br><h1>update your profile</h1><br>
-
-<div class="col-sm-6 col-sm-offset-3">
   <div class="user-form">
     <%= form_for(@user) do |f| %>
       <%= render 'shared/error_messages' %>
 
-      <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control' %><br>
+      <%= f.label :name, "name" %><br>
+      <%= f.text_field :name, class: 'input' %><br>
 
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %><br>
+      <%= f.label :email, "e-mail" %><br>
+      <%= f.email_field :email, class: 'input' %><br>
 
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %><br>
+      <%= f.label :password, "password" %><br>
+      <%= f.password_field :password, class: 'input' %><br>
 
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %><br>
+      <%= f.label :password_confirmation, "confirmation" %><br>
+      <%= f.password_field :password_confirmation, class: 'input' %><br>
 
-      <%= f.label :income, "annual income" %>
-      <%= f.text_field :income, class: 'form-control' %><br>
+      <%= f.label :income, "annual income" %><br>
+      <%= f.text_field :income, class: 'input' %><br>
 
-      <%= f.label :zipcode, "zip code" %>
-      <%= f.text_field :zipcode, class: 'form-control' %><br>
+      <%= f.label :zipcode, "zip code" %><br>
+      <%= f.text_field :zipcode, class: 'input' %><br>
 
-      <%= f.submit "save changes", class: "btn btn-primary" %>
+      <%= f.submit "save changes", class: "submit" %>
     <% end %>
-    </div>
   </div>
 </div>
 
