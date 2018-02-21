@@ -20,7 +20,6 @@ class UsersController < ApplicationController
       render json: @user, status: 201
       log_in @user
       flash[:success] = "welcome!"
-      redirect_to @user
     else
       redirect_to home
     end

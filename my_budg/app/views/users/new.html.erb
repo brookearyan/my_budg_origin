@@ -7,94 +7,67 @@
     body {
       background-color: #EEEEF7;
     }
-    .new-user {
-      font-family: 'Rock Salt', cursive;
-    }
-
-    label {
-      font-family: avenir next;
-      font-weight: 100;
-      font-size: 20px;
-    }
-
-    .row {
-      font-family: avenir next;
+    .logo {
+      text-align: left;
+      font-family: 'Montserrat Subrayada', sans-serif;
+      font-size: 4vw;
       color: #263675;
-      font-size: 16px;
+      text-shadow: 3px 3px white;
     }
-
-    .btn {
+    .new-user label, tr {
       font-family: avenir next;
       font-weight: 100;
-      background-color: #808080;
-      text-align: center;
-      font-size: 16px;
-    }
-    h1, h2, h4, h5 {
-      font-family: 'Rock Salt', cursive;
-      color: #808080;
-    }
-
-    a:hover {
-      text-decoration: none;
-      background-color: #808080;
-      color: black;
+      font-size: 1.5vw;
+      letter-spacing: .1vw;
+      margin: 0;
+      padding: .5vw;
     }
 
     h1 {
-      margin-top: 35px;
-      font-size: 30px;
+      font-family: 'Rock Salt', cursive;
+      margin-top: 5vw;
+      font-size: 2vw;
       text-align: center;
       color: #C0C0C0;
     }
-
-    p {
-    font-family: 'Lora', serif;
-    color: #808080;
-    margin-left: 8px;
-    margin-right: 10px;
-    font-size: 18px;
-    }
-
-    p a {
-      color: #263675;
+    .new-user {
+      width: 100%;
+      padding: 1vw 25vw;
     }
   </style>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <link rel="stylesheet" type="text/css" href="index.scss">
     <meta charset="utf-8">
-    <title></title>
   </head>
   <body>
-    <br><h1>sign up</h1><br><br>
-      <div class="row">
-        <div class="col-sm-6 col-sm-offset-3">
+    <h1>sign up</h1>
+      <div class="new-user">
           <%= form_for(@user) do |f| %>
             <%= render 'shared/error_messages' %>
 
             <%= f.label :name, "name"%>
-            <%= f.text_field :name, class: 'form-control' %><br>
+            <%= f.text_field :name, class: 'input' %><br>
 
             <%= f.label :zipcode, "email" %>
-            <%= f.email_field :email, class: 'form-control' %><br>
+            <%= f.email_field :email, class: 'input' %><br>
 
             <%= f.label :password, "password" %>
-            <%= f.password_field :password, class: 'form-control' %><br>
+            <%= f.password_field :password, class: 'input' %><br>
 
             <%= f.label :password_confirmation, "confirmation" %>
-            <%= f.password_field :password_confirmation, class: 'form-control' %><br>
+            <%= f.password_field :password_confirmation, class: 'input' %><br>
 
             <%= f.label :income, "annual income" %>
-            <%= f.text_field :income, class: 'form-control' %><br>
+            <%= f.text_field :income, class: 'input' %><br>
 
             <%= f.label :zipcode, "zip code" %>
-            <%= f.text_field :zipcode, class: 'form-control' %><br>
+            <%= f.text_field :zipcode, class: 'input' %><br>
 
-            <br><%= f.submit "create my account", class: "btn btn-primary" %><br><br>
+            <br><%= f.submit "create", class: "submit" %><br><br>
           <% end %>
         </div>
       </div>
-      <div class="col-sp-6">
+      <div class="new-user">
         <table id="user-result"></table>
       </div>
       <script type="text/javascript" charset="utf-8">
@@ -110,7 +83,7 @@
             posting.done(posting => {
               const markup =
               `<tr>
-                <th colspan="2">${posting.name}</th>
+                <th>${posting.name}</th>
               </tr>
               <tr>
                 <td> email: </td><td>${posting.email}</td>
